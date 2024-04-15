@@ -1,0 +1,23 @@
+
+
+#content_buttons{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 1rem;
+}
+
+ion-label{
+
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+ion-button{
+  width: 25rem;
+}
+

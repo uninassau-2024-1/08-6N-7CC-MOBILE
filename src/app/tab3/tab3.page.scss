@@ -1,0 +1,21 @@
+#icones{
+  padding:  10px;
+}
+
+ion-list{
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+ion-item{
+  width: 20rem;
+  border-radius: 0.3rem;
+  margin-top: 1rem;
+}
+
+ion-label{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
