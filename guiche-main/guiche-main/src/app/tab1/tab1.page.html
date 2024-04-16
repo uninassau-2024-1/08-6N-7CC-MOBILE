@@ -1,0 +1,109 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Guichê </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card color="light">
+    <ion-title class="cliente-title">
+      Bem vindo(a) ao nosso Sistema para Controle de Atendimento :&#41;
+    </ion-title>
+    <ion-img
+      src="../../assets/totem.svg"
+      alt="totem-image"
+      class="totem-img"
+    ></ion-img>
+
+    <ion-button id="open-modal" expand="block">
+      <ion-icon name="ticket" slot="end"></ion-icon>
+      RETIRE SUA SENHA
+    </ion-button>
+
+    <ion-modal #modal trigger="open-modal">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Tipos de Senha:</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="modal.dismiss()"
+                ><ion-icon name="close-outline"></ion-icon
+              ></ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <ion-list>
+            <ion-button
+              button="true"
+              detail="false"
+              (click)="modal.dismiss()"
+              expand="block"
+              (click)="senhasService.senhaRetirada('SG')"
+              >Senha Geral</ion-button
+            >
+            <ion-button
+              button="true"
+              detail="false"
+              (click)="modal.dismiss()"
+              expand="block"
+              (click)="senhasService.senhaRetirada('SP')"
+              >Senha Prior</ion-button
+            >
+
+            <ion-button
+              button="true"
+              detail="false"
+              (click)="modal.dismiss()"
+              expand="block"
+              (click)="senhasService.senhaRetirada('SE')"
+              >Senha Exame</ion-button
+            >
+          </ion-list>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-list-header>Últimas senhas chamadas:</ion-list-header>
+        <ion-item *ngFor="let senha of senhasService.senhasChamadas">
+          <ion-icon
+            [name]="senha.icon"
+            slot="start"
+            [color]="senha.color"
+          ></ion-icon>
+          {{ senha.senha }}
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<style>
+  .totem-img {
+    width: 250px;
+    height: 250px;
+    margin-left: 100px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+  }
+
+  .cliente-title {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+
+@media only screen and (max-width: 768px) {
+  /* Adicione aqui os estilos específicos para dispositivos móveis */
+  .totem-img {
+    margin-top: 50px;
+  }
+  .cliente-title {
+   display: none;
+  }
+}
+</style>
