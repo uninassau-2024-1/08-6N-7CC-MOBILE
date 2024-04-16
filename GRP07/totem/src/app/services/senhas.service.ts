@@ -4,41 +4,44 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class SenhasService {
-  senhasGeradasSubject: any;
 
   constructor() { }
 
-  // Variáveis para controle de horário de expediente
   private expedienteIniciado: boolean = false;
   private expedienteEncerrado: boolean = false;
 
-  // Inicia o expediente de trabalho
   iniciarExpediente() {
     this.expedienteIniciado = true;
     this.expedienteEncerrado = false;
   }
 
-  // Encerra o expediente de trabalho
   encerrarExpediente() {
     this.expedienteEncerrado = true;
-    // Limpa as senhas remanescentes
     this.limparSenhasRemanescentes();
   }
 
-  // Verifica se o expediente está em andamento
   expedienteEmAndamento(): boolean {
     return this.expedienteIniciado && !this.expedienteEncerrado;
   }
 
-  // Limpa as senhas remanescentes ao final do expediente
   private limparSenhasRemanescentes() {
+    if (!this.expedienteEncerrado) {
+      return;
+    }
     this.senhasArray = [];
     this.senhasGeral = 0;
     this.senhasPrior = 0;
     this.senhasExame = 0;
     this.senhasTotal = 0;
+    this.ultimasSenhasChamadas = [];
   }
 
+  isHorarioExpediente(): boolean {
+    const agora = new Date();
+    const horaAtual = agora.getHours();
+    return horaAtual >= 7 && horaAtual < 17;
+  }
+ 
   public senhasGeral: number = 0;
   public senhasPrior: number = 0;
   public senhasExame: number = 0;
@@ -48,6 +51,7 @@ export class SenhasService {
 
   public inputNovaSenha: string = '';
   public senhasArray: any = [];
+  public ultimasSenhasChamadas: string[] = [];
 
   public tmpGeral: number = 0;
   public tmpPrior: number = 0;
@@ -172,6 +176,16 @@ export class SenhasService {
 
     console.log(this.senhasArray);
     this.calcTempoMedio();
+
+    this.ultimasSenhasChamadas.push(this.inputNovaSenha);
+
+    // Verificar se o histórico ultrapassa 5 senhas e remover a mais antiga, se necessário
+    if (this.ultimasSenhasChamadas.length > 5) {
+      this.ultimasSenhasChamadas.shift(); // Remove a primeira senha (a mais antiga)
+    }
+    if (!this.expedienteEmAndamento() || !this.isHorarioExpediente()) {
+      return; // Não gera novas senhas se o expediente não estiver em andamento ou fora do horário
+    }
   }
 
   
