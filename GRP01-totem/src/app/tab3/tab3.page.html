@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="ion-text-center">
+      Relatório
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title class="ion-text-center" style="font-size: 30px" > Relatório </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>Senhas emitidas: {{senhasService.senhasTotal}}</ion-item>
+        <ion-item>Senhas Geral: {{senhasService.senhasGeral}}</ion-item>
+        <ion-item>Senhas Prioritárias: {{senhasService.senhasPrior}}</ion-item>
+        <ion-item>Senhas Exame: {{senhasService.senhasExame}}</ion-item>
+      </ion-list>
+    </ion-card-content>
+      <ion-card-content>
+      <!--relatorio quantitativo de senhas atendidas-->
+      <ion-list>
+        <ion-item>Senhas Atendidas: {{senhasService.senhasAtendidasTotal}}</ion-item>
+        <ion-item>Senhas Geral Atendidas: {{senhasService.senhasAtendidasGeral}}</ion-item>
+        <ion-item>Senhas Prioritárias Atendidas: {{senhasService.senhasAtendidasPrior}}</ion-item>
+        <ion-item>Senhas de Exame Atendidas: {{senhasService.senhasAtendidasExame}}</ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item  *ngFor="let senha of senhasService.atendidosStorage">
+          <ion-label class="ion-text-center" style="font-size: 15px">
+           Senha: {{ senha.numeracaoSenha }},
+           Prioridade: {{ senha.prioridade }},
+           Guichê: {{ senha.guiche }},
+           Emissão: {{ senha.dataHoraEmissao }},
+           Atendido: {{ senha.dataHoraAtendimento }},
+           Tempo de Atendimento: {{ senha.tempoAtendimento }}
+        </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+
+
