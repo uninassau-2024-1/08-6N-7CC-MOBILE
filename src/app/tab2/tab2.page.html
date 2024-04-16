@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      ATENDIMENTO
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">ATENDIMENTO</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<!-- (click)="SenhasService.testePuxarSenha()"-->
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button expand="block" (click)="SenhasService.chamarSenha()">
+        <H1>Chamar uma Senha</H1>
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-text>
+        <H1 color="white">Senhas na fila</H1>
+      </ion-text>
+
+      <ion-list>
+        <ion-item *ngFor="let senha of SenhasService.listaSenhas.ST">
+          <div>
+            <p>{{ senha }}</p>
+          </div>
+        </ion-item>
+      </ion-list>
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
