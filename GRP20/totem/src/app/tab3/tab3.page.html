@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Relatórios
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card-content>
+    <ion-list class="listaSenhasRecentes">
+      <ion-list-header><ion-label>Quantitativo geral das senhas emitidas</ion-label></ion-list-header>
+      <ion-item> Senhas emitidas: {{senhasService.senhasTotal}}</ion-item>
+      <ion-item> Senhas Geral: {{senhasService.senhaGeral}}</ion-item>
+      <ion-item> Senhas Prioritárias: {{senhasService.senhaPrior}}</ion-item>
+      <ion-item> Senhas Exame: {{senhasService.senhaExame}}</ion-item>
+    </ion-list>
+  </ion-card-content>
+
+  <ion-card>
+    <ion-list>
+      <ion-list>
+        <ion-list-header><ion-label>Quantitativo geral das senhas atendidas</ion-label></ion-list-header>
+        <ion-item>Senhas Chamadas: {{ senhasService.senhasChamadas }}</ion-item>
+        <ion-item>Senhas Geral: {{ senhasService.senhasGeralChamadas }}</ion-item>
+        <ion-item>Senhas Prioritárias: {{ senhasService.senhasPriorChamadas }}</ion-item>
+        <ion-item>Senhas Exame: {{ senhasService.senhasExameChamadas }}</ion-item>
+      </ion-list>
+    </ion-list>
+  </ion-card>
+
+  <ion-card>
+    <ion-list-header><ion-label>Tempo médio de atendimento:</ion-label></ion-list-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>Senha Geral: {{senhasService.mediaSenhaGeral}} segundos</ion-item>
+        <ion-item>Senha Prioritária: {{senhasService.mediaSenhaPrior}} segundos</ion-item>
+        <ion-item>Senha Exame: {{senhasService.mediaSenhaExame}} segundos</ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
