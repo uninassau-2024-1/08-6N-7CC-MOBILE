@@ -5,5 +5,6 @@
 * Pedro Emanuel Alencar de Melo - 01482712
 * Izabelly Vitória de Freitas Cardoso - 01457142
 * Lucas Soares Ribeiro  - 01457146
+* Ellen Mariza Camilo Cabral de Almeida - 01482450
 
 ---
