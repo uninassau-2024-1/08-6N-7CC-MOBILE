@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Sistema de Gerenciamento de Senhas</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4a460; /* Cor de fundo da página */
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+
+  .desenvolvedores-container {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    background-color: #f4a460; /* Fundo branco para destaque */
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+  }
+  .senha-container {
+    background-color: #FFD700; /* Cor dourada para o gerador de senhas */
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 10px;
+    width: 300px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+  }
+  .guiche-container {
+    background-color: #90EE90; /* Cor verde clara para o guichê de atendimento */
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 10px;
+    width: 300px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    position: relative;
+  }
+  .piscar-vermelho {
+    animation: piscar 1s step-start infinite;
+    color: red;
+  }
+  @keyframes piscar {
+    50% { color: transparent; }
+  }
+  .contador-chamadas {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border: none;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
+  select {
+    padding: 10px;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+
+<h1 style="font-weight: bold;">Bem vindo ao sistema de controle de senhas</h1>
+
+
+<div class="container">
+  <div class="desenvolvedores-container">
+    <h2>Desenvolvedores:</h2>
+    <p>Andre Crispim - 01008087</p>
+    <p>Rafael Alheiro - 011018601</p>
+    <p>Lucas Jose - 01432155</p>
+    <p>Maria Micaelle - 01461200</p>
+  </div>
+
+
+  <div class="senha-container">
+    <h1>Gerador de Senhas</h1>
+    <label for="tipoSenha">Tipo de Senha:</label>
+    <select id="tipoSenha">
+      <option value="SG">Senha Geral</option>
+      <option value="SP">Senha Prioritária</option>
+      <option value="SE">Senha de Exame</option>
+    </select>
+    <button onclick="gerarSenha()">Gerar Senha</button>
+    <button onclick="gerarRelatorioDia()">Relatório do Dia</button>
+    
+  </div>
+  
+  <div class="guiche-container">
+    <h1>Guichê de Atendimento</h1>
+    <div id="atendimentoAtual">
+      <p>Nenhuma senha sendo atendida no momento.</p>
+    </div>
+    <div class="contador-chamadas">
+      <p>Total de Chamadas: <span id="totalChamadas">0</span></p>
+      <p>Senha Mais Chamada: <span id="senhaMaisChamada"></span></p>
+      <p>Data e Hora da Última Chamada: <span id="dataHoraUltimaChamada"></span></p>
+    </div>
+    <div id="ultimasSenhas">
+
+
+    </div>
+    <button onclick="zerarSenhas()">Zerar Senhas</button>
+  </div>
+</div>
+
+
+<script>
+let contadorSenhas = { SG: 0, SP: 0, SE: 0 };
+let totalChamadas = 0;
+let senhasChamadas = { SG: [], SP: [], SE: [] };
+let guicheAtual = Math.floor(Math.random() * 3) + 1; 
+
+
+function gerarSenha() {
+  let tipoSenha = document.getElementById('tipoSenha').value;
+  contadorSenhas[tipoSenha]++;
+  totalChamadas++;
+  let senhaGerada = tipoSenha + ('000' + contadorSenhas[tipoSenha]).slice(-3);
+  let dataHora = new Date().toLocaleString('pt-BR');
+  document.getElementById('atendimentoAtual').innerHTML = `<p><span class="piscar-vermelho">Dirija-se ao Guichê ${guicheAtual}</span> com a senha: <strong>${senhaGerada}</strong></p><p>Data e Hora: <strong>${dataHora}</strong></p>`;
+  document.getElementById('totalChamadas').textContent = totalChamadas;
+  atualizarSenhaMaisChamada(tipoSenha);
+  dataHoraUltimaChamada = dataHora;
+  document.getElementById('dataHoraUltimaChamada').textContent = dataHoraUltimaChamada;
+  senhasChamadas[tipoSenha].push({senha: senhaGerada, dataHora: dataHora});
+  atualizarUltimasSenhasPorTipo(); 
+  guicheAtual = Math.floor(Math.random() * 3) + 1; 
+}
+
+
+function atualizarSenhaMaisChamada(tipoSenha) {
+  let maxChamadas = 0;
+  let senhaMaisChamada = '';
+  for (let senha in contadorSenhas) {
+    if (contadorSenhas[senha] > maxChamadas) {
+      maxChamadas = contadorSenhas[senha];
+      senhaMaisChamada = senha;
+    }
+  }
+  document.getElementById('senhaMaisChamada').textContent = senhaMaisChamada + ' (' + maxChamadas + ' vezes)';
+}
+
+
+function atualizarUltimasSenhasPorTipo() {
+  let ultimasSenhasHTML = '<h2>Últimas Senhas Chamadas:</h2>';
+
+
+  for (let tipo in senhasChamadas) {
+    if (senhasChamadas[tipo].length > 0) {
+      ultimasSenhasHTML += `<h3>Últimas Senhas de ${tipo}:</h3>`;
+      const ultimasSenhasTipo = senhasChamadas[tipo].slice(-5); 
+      for (let senha of ultimasSenhasTipo) {
+        ultimasSenhasHTML += `<p>${senha.senha} - ${senha.dataHora}</p>`;
+      }
+    }
+  }
+
+
+  const ultimasSenhasElemento = document.getElementById('ultimasSenhas');
+  if (ultimasSenhasElemento) {
+    ultimasSenhasElemento.innerHTML = ultimasSenhasHTML;
+  }
+}
+
+
+function zerarSenhas() {
+  contadorSenhas = { SG: 0, SP: 0, SE: 0 };
+  totalChamadas = 0;
+  senhasChamadas = { SG: [], SP: [], SE: [] };
+  guicheAtual = Math.floor(Math.random() * 3) + 1; 
+  document.getElementById('atendimentoAtual').innerHTML = '<p>Nenhuma senha sendo atendida no momento.</p>';
+  document.getElementById('totalChamadas').textContent = '0';
+  document.getElementById('senhaMaisChamada').textContent = '';
+  document.getElementById('dataHoraUltimaChamada').textContent = '';
+  document.getElementById('ultimasSenhas').innerHTML = ''; 
+}
+
+
+function gerarRelatorioDia() {
+    let dataAtual = new Date().toLocaleDateString('pt-BR');
+    let relatorioDia = { SG: [], SP: [], SE: [] }; 
+    for (let tipo in senhasChamadas) {
+        for (let senha of senhasChamadas[tipo]) {
+            if (senha.dataHora.includes(dataAtual)) {
+                relatorioDia[tipo].push(senha); 
+            }
+        }
+    }
+    exibirRelatorioPorTipo(relatorioDia, "Relatório do Dia - " + dataAtual);
+}
+
+
+function exibirRelatorioPorTipo(relatorio, titulo) {
+    let relatorioHTML = `<h2>${titulo}</h2>`;
+    for (let tipo in relatorio) {
+        if (relatorio[tipo].length > 0) {
+            relatorioHTML += `<h3>${tipo}</h3>`;
+            for (let senha of relatorio[tipo]) {
+                relatorioHTML += `<p>${senha.senha} - ${senha.dataHora} </p>`;
+            }
+        }
+    }
+    alert(relatorioHTML); 
+}
+
+
+function gerarQuantidadeTotalDia(senhasChamadas) {
+  const dataAtual = new Date();
+  const diaAtual = dataAtual.getDate();
+  let relatorioDia = "Relatório de Senhas Emitidas Hoje:\n\n";
+
+
+  for (let tipo in senhasChamadas) {
+    const senhasTipo = senhasChamadas[tipo];
+    let totalTipo = 0;
+    for (let senha of senhasTipo) {
+      const dataSenha = new Date(senha.dataHora);
+      if (dataSenha.getDate() === diaAtual) {
+        totalTipo++;
+      }
+    }
+    relatorioDia += `Tipo ${tipo}: ${totalTipo} senhas\n`;
+  }
+
+
+  alert(relatorioDia);
+}
+
+
+</script>
+
+
+</body>
+</html>
+
+
+
