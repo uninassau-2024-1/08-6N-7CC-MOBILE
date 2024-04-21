@@ -1,0 +1,29 @@
+<ion-header [translucent]="false">
+  <ion-toolbar>
+    <ion-title size="large" style="font-size: medium">Painel</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large" >Painel</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-card-header>
+        <ion-card-title>Últimas senhas retiradas</ion-card-title>
+      </ion-card-header>
+      <ion-list>
+        <ion-item *ngFor="let senha of ultimasSenhas.slice(-5)">
+          {{ senha }}
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  
+
+
+</ion-content>

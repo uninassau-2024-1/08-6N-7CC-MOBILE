@@ -17,6 +17,42 @@ export class SenhasService {
 
   constructor() {}
 
+  private expedienteIniciado: boolean = false;
+  private expedienteEncerrado: boolean = false;
+
+  iniciarExpediente() {
+    this.expedienteIniciado = true;
+    this.expedienteEncerrado = false;
+  }
+
+  encerrarExpediente() {
+    this.expedienteEncerrado = true;
+    this.limparSenhasRemanescentes();
+  }
+
+  expedienteEmAndamento(): boolean {
+    return this.expedienteIniciado && !this.expedienteEncerrado;
+  }
+
+  private limparSenhasRemanescentes() {
+    if (!this.expedienteEncerrado) {
+      return;
+    }
+
+    this.senhasArray = [];
+    this.senhasGeral = 0;
+    this.senhasPrioridade  = 0;
+    this.senhasTotais  = 0;
+    this.senhasExames = 0;
+    this.senhasChamadas = [];
+  }
+
+  isHorarioExpediente(): boolean {
+    const agora = new Date();
+    const horaAtual = agora.getHours();
+    return horaAtual >= 7 && horaAtual < 17;
+  }
+
   //somas
   somaGeral() {
     this.senhasGeral++;
@@ -126,5 +162,14 @@ export class SenhasService {
     this.inputNovaSenha = senha;
     console.log(this.senhasArray);
     this.calcularTempoMedio();
+
+     // Verificar se o histórico ultrapassa 5 senhas e remover a mais antiga, se necessário
+     if (this.senhasChamadas.length > 5) {
+      this.senhasChamadas.shift(); // Remove a primeira senha (a mais antiga)
+    }
+    if (!this.expedienteEmAndamento() || !this.isHorarioExpediente()) {
+      return; // Não gera novas senhas se o expediente não estiver em andamento ou fora do horário
+    }
   }
+
 }
