@@ -6,10 +6,10 @@ Este é um projeto um sistema gerenciamento de atendimento.
 <ul>
 <li>Alex Fernando A. da Silva - 01488555</li>
 <li>Davi Pereira Morato Costa - 01404374</li>
-<li>Pedro Emanuel Alencar de Melo - 01482712</li>
+<li>Ellen Mariza Camilo Cabral de Almeida - 01482450</li>
 <li>Izabelly Vitória de Freitas Cardoso - 01457142</li>
 <li>Lucas Soares Ribeiro  - 01457146</li>
-<li>Ellen Mariza Camilo Cabral de Almeida - 01482450</li>
+<li>Pedro Emanuel Alencar de Melo - 01482712</li>
 </ul>
 </details>
 
