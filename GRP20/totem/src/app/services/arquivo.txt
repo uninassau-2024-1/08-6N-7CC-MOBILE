@@ -1,0 +1,35 @@
+  public tipoSenha: string[] = []
+  public tipoSenhaAtual: string = '';
+
+  public senhaGeral: number = 0;
+  public senhaPrior: number = 0;
+  public senhaExame: number = 0;
+  public senhasTotal: number = 0;
+
+  public inputNovaSenha: string = '';
+  public proximaSenha: string = '';
+
+  public atendimentoOk: boolean = false;
+  public senhaChamadaOk: boolean = false;
+  public senhaGeralOk: boolean = false;
+  public senhaPriorOk: boolean = false;
+  public senhaExameOk: boolean = false;
+
+  public mediaSenhaGeral: number =0;
+  public mediaSenhaPrior: number =0;
+  public mediaSenhaExame: number =0;
+
+  public numSenhaGeral: number =0;
+  public numSenhaPrior: number =0;
+  public numSenhaExame: number =0;
+
+  public fimAtendimento: number = 0;
+  public inicioAtendimento: number = 0;
+  public diferencaTempo: number = 0;
+
+  public tempoAtendimentoSG: number[] = [];
+  public tempoAtendimentoSP: number[] = [];
+  public tempoAtendimentoSE: number[] = [];
+  
+  public senhasArray: { [key: string]: string[] } = {'SG': [],'SP': [],'SE': [] };
+  public listaSenhas: string[] = [];

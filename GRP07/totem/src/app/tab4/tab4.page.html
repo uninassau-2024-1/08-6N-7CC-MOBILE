@@ -1,0 +1,24 @@
+<ion-header [translucent]="false">
+  <ion-toolbar>
+    <ion-title>
+      <ion-title size="large" style="font-size: medium;">Painel</ion-title>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large" style="font-size: medium;">Painel</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+  <ion-card>
+  <ion-list>
+    <ion-item *ngFor="let senha of ultimasSenhas">
+      {{ senha }}
+    </ion-item>
+  </ion-list>
+</ion-card>
+</ion-content>

@@ -1,0 +1,22 @@
+// Estilos para o componente que envolve os botões
+ion-card {
+    // Definindo estilos para o componente pai
+    background-color: #ffffff; // Exemplo de cor de fundo branca
+    padding: 20px; // Exemplo de espaçamento interno
+    
+    // Estilos para os elementos filhos dentro do ion-card
+    ion-card-header {
+      // Estilos para o cabeçalho do cartão
+      font-size: 1.2em; // Exemplo de tamanho da fonte
+      color: #000000; // Exemplo de cor do texto
+    }
+    
+    ion-card-content {
+      // Estilos para o conteúdo do cartão
+      ion-button {
+        // Estilos para os botões dentro do conteúdo do cartão
+        margin-bottom: 10px; // Exemplo de margem inferior
+      }
+    }
+  }
+  

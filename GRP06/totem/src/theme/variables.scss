@@ -1,0 +1,33 @@
+// // Ionic Variables and Theming. For more info, please see:
+// // http://ionicframework.com/docs/theming/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/** Ionic CSS Variables **/
+:root {
+  /** primary **/
+  --ion-color-primary: #ca44eb;
+  --ion-color-primary-rgb: 202, 68, 235;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #e58efb;
+  --ion-color-primary-tint: #ca44eb;
+
+  --ion-background-color: #eaeaea;
+  --ion-font-family: 'Poppins', sans-serif;
+
+  ion-toolbar {
+    --color: #762a89;
+    --border-color: #762a89;
+    --border-width: 4px 0;
+    --border-style: none none solid none;
+  }
+}
+
+html {
+  /*
+   * For more information on dynamic font scaling, visit the documentation:
+   * https://ionicframework.com/docs/layout/dynamic-font-scaling
+   */
+  --ion-dynamic-font: var(--ion-default-dynamic-font);
+}
