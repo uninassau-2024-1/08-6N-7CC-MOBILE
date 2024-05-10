@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Cliente
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Cliente</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-input readonly="true" label="Senha emitida: " [value]="senhasService['inputNovaSenha']"></ion-input>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button expand="block" (click)="senhasService.novaSenha('SG')"><ion-icon name="body-outline"></ion-icon>Senha
+        Geral</ion-button>
+      <ion-button expand="block" (click)="senhasService.novaSenha('SP')"><ion-icon name=""></ion-icon>Senha
+        Prioridade</ion-button>
+      <ion-button expand="block" (click)="senhasService.novaSenha('SE')"><ion-icon
+          name="reader-outline"></ion-icon>Senha Exame</ion-button>
+    </ion-card-content>
+    <ion-card-content>
+      <ion-input readonly="true" label="Senha chamada: " [value]="senhasService['proximaSenha']"></ion-input>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>Ultimas senhas chamadas:</ion-card-header>
+    <ion-card-content style="display: flex; justify-content: center; align-items: center;">
+      <ion-list>
+        <ion-item *ngFor="let senha of senhasService.listaSenhas | slice: 0:5">
+          {{senha}}
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
