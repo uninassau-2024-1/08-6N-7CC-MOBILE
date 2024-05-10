@@ -1,0 +1,118 @@
+class Ticket {
+  constructor(public id: number, public type: string, public avgTime: number, public issueTime: Date) {}
+}
+
+class Agent {
+  constructor(public id: number, public type: string) {}
+}
+
+class Queue {
+  private tickets: Ticket[] = [];
+
+  public enqueue(ticket: Ticket) {
+    this.tickets.push(ticket);
+  }
+
+  public dequeue(): Ticket | undefined {
+    return this.tickets.shift();
+  }
+
+  public size(): number {
+    return this.tickets.length;
+  }
+}
+
+class ServiceSystem {
+  private queues: { [key: string]: Queue } = {
+    SP: new Queue(),
+    SE: new Queue(),
+    SG: new Queue(),
+  };
+
+  private lastCalled: Ticket[] = [];
+  private isOpen: boolean = false;
+
+  public startWorkDay() {
+    this.isOpen = true;
+  }
+
+  public endWorkDay() {
+    this.isOpen = false;
+
+    // Descartar senhas restantes
+    for (let queue of Object.values(this.queues)) {
+      while (queue.size() > 0) {
+        queue.dequeue();
+      }
+    }
+  }
+
+  public issueTicket(type: string, avgTime: number): Ticket { // type argument should be a string
+    const id = Math.floor(Math.random() * 10000);
+    const issueTime = new Date();
+    const ticket = new Ticket(id, type, avgTime, issueTime);
+    this.queues[type].enqueue(ticket);
+    return ticket;
+  }
+
+  public callNext(): Ticket | undefined {
+    if (!this.isOpen) {
+      throw new Error('O expediente de trabalho não começou ainda.');
+    }
+
+    let nextTicket: Ticket | undefined;
+
+    if (this.queues.SP.size() > 0) {
+      nextTicket = this.queues.SP.dequeue();
+    } else if (this.queues.SE.size() > 0) {
+      nextTicket = this.queues.SE.dequeue();
+    } else {
+      nextTicket = this.queues.SG.dequeue();
+    }
+
+    if (nextTicket) {
+      this.lastCalled.push(nextTicket);
+
+      // Manter apenas as últimas 5 senhas chamadas
+      if (this.lastCalled.length > 5) {
+        this.lastCalled.shift();
+      }
+    }
+
+    return nextTicket;
+  }
+
+  public getLastCalled(): Ticket[] {
+    return this.lastCalled;
+  }
+}
+
+// Exemplo de uso
+const system = new ServiceSystem();
+
+system.startWorkDay();
+
+document.getElementById('btnSP').addEventListener('click', () => {
+  const ticket = system.issueTicket("SP", 15); // type argument should be a string "SP"
+  updateCalledTickets();
+});
+
+document.getElementById('btnSE').addEventListener('click', () => {
+  const ticket = system.issueTicket("SE", 1); // type argument should be a string "SE"
+  updateCalledTickets();
+});
+
+document.getElementById('btnSG').addEventListener('click', () => {
+  const ticket = system.issueTicket("SG", 5); // type argument should be a string "SG"
+  updateCalledTickets();
+});
+
+function updateCalledTickets() {
+  const calledTicketsDiv = document.getElementById('calledTickets');
+  calledTicketsDiv.innerHTML = '';
+
+  const tickets = system.getLastCalled();
+  for (let ticket of tickets) {
+    const ticketDiv = document.createElement('div');
+    ticketDiv.className = 'ticket';
+    ticketDiv.textContent = `Senha: ${ticket.id}, Tipo: ${ticket.type}, Tempo médio: ${ticket.avgTime} minutos, Emitida em: ${ticket.issueTime.
