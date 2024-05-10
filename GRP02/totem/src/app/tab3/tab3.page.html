@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Relatórios de Senhas
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        Quantitativo geral das senhas emitidas:
+      </ion-label>
+      <ion-badge slot="end" color="primary">
+        {{ senhasService.getTotalSenhasEmitidas() }}
+      </ion-badge>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Quantitativo geral das senhas atendidas:
+      </ion-label>
+      <ion-badge slot="end" color="success">
+        {{ senhasService.getTotalSenhasAtendidas() }}
+      </ion-badge>
+    </ion-item>
+  </ion-list>
+</ion-content>

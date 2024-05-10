@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Tab 1
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 1</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-card>
+    <ion-card-header>
+      <ion-input readonly="true" label="Senha: " value="{{inputNovaSenha}}"></ion-input>
+    </ion-card-header>
+    <ion-card-content class="bntSenhas">
+      <ion-button color="dark" (click)="senhasService.emitirSenha('geral')" > Senha Geral </ion-button>
+      <ion-button color="warning" (click)="senhasService.emitirSenha('prior')" > Senha Prioritária </ion-button>
+      <ion-button color="tertiary" (click)="senhasService.emitirSenha('exame')" > Senha Exame </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+<ion-card>
+  <ion-card-content>
+    <ion-list>
+      <ion-list-header>Últimas Senhas Chamadas</ion-list-header>
+      <ion-item *ngFor="let senha of senhasService.senhasChamadas">
+        <ion-icon *ngIf="senha" name="{{senha.icon}}" slot="start" color="{{senha.color}}"></ion-icon>
+        {{senha.data}} - {{senha.senha}}
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>
+  
+</ion-content>
