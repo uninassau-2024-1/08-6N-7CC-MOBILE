@@ -1,0 +1,23 @@
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-input readonly="true" label="Senha: " [value]="senhasService.inputNovaSenha"></ion-input>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button expand="block" (click)="chamarSenha('SG')">Senha Geral</ion-button>
+      <ion-button expand="block" (click)="chamarSenha('SP')">Senha Prioritária</ion-button>
+      <ion-button expand="block" (click)="chamarSenha('SE')">Senha Exame</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-label>Últimas Senhas Chamadas</ion-label>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let senha of senhasService.ultimasSenhasChamadas.reverse()">{{ senha }}</ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
