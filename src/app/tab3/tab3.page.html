@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Tab 3
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 3</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+       <ion-label> Relatório Senhas Emitidas  </ion-label>
+        <ion-item>Senhas Totais Emitidas: {{senhasService.relatorioSenhas.senhasTotalEmitidas}}</ion-item>
+        <ion-item>Senhas Gerais Emitidas: {{senhasService.relatorioSenhas.senhasGeralEmitidas}}</ion-item>
+        <ion-item>Senhas Prioritárias Emitidas: {{senhasService.relatorioSenhas.senhasPriorEmitidas}}</ion-item>
+        <ion-item>Senhas Exames Emitidas: {{senhasService.relatorioSenhas.senhasExameEmitidas}}</ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+       <ion-label> Relatório Senhas Chamadas  </ion-label>
+        <ion-item>Senhas Totais Chamadas: {{senhasService.relatorioSenhas.senhasTotalChamadas}}</ion-item>
+        <ion-item>Senhas Gerais Chamadas: {{senhasService.relatorioSenhas.senhasGeralChamadas}}</ion-item>
+        <ion-item>Senhas Prioritárias Chamadas: {{senhasService.relatorioSenhas.senhasPriorChamadas}}</ion-item>
+        <ion-item>Senhas Exames Chamadas: {{senhasService.relatorioSenhas.senhasExameChamadas}}</ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
