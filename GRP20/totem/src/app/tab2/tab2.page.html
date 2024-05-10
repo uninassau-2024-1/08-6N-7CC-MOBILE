@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Atendimento <!--Alterado-->
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Guichê</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-header><ion-input value="{{inputSenhaChamada}}"><ion-card-title>Guichê</ion-card-title></ion-input></ion-card-header>
+    <ion-card-content>
+        <ion-button expand="block" (click)="senhasService.chamarProximaSenha()" *ngIf="!senhasService.senhaChamadaOk">Chamar Senha</ion-button>
+        <ion-button color="success" expand="block" (click)="senhasService.iniciarAtendimento()" *ngIf="!senhasService.atendimentoOk && senhasService.senhaChamadaOk" >Iniciar atendimento</ion-button>
+        <ion-button color="danger" expand="block" (click)="senhasService.encerrarAtendimento()" *ngIf="senhasService.atendimentoOk">Encerrar atendimento</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
