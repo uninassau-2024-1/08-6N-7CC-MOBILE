@@ -24,28 +24,26 @@
     </ion-card-header>
     <ion-card-content>
       <ion-list>
-        <ion-item>{{ areaBusca.logradouro }} {{ areaBusca.bairro }} {{ areaBusca.localidade }} {{ areaBusca.uf
-          }}</ion-item>
+        <ion-item>{{ areaBusca.logradouro }} {{ areaBusca.bairro }} {{ areaBusca.localidade }} {{ areaBusca.uf }}</ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
+  <ion-card *ngIf="pokemon">
     <ion-card-header>
-      <ion-card-title>{{ 'bulbasaur' | uppercase }}</ion-card-title>
-      <ion-img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg"
-        alt="Bulbasaur"></ion-img>
+      <ion-card-title>{{ pokemon.name | uppercase }}</ion-card-title>
+      <ion-img [src]="pokemon.sprites.other['dream_world']['front_default']" alt="{{ pokemon.name }}"></ion-img>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
         <ion-item>
-          <ion-label>Abilities: 2</ion-label>
+          <ion-label>Abilities: {{ pokemon.abilities.length }}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Height: 7</ion-label>
+          <ion-label>Height: {{ pokemon.height }}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Weight: 69</ion-label>
+          <ion-label>Weight: {{ pokemon.weight }}</ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>

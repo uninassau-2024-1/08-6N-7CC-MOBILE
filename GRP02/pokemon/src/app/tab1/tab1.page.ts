@@ -15,6 +15,9 @@ export class Tab1Page {
     logradouro: '',
     uf: '',
   };
+
+  pokemon: any = null;
+
   constructor(
     private pokeAPIService: PokeAPIService,
     private viaCEPService: ViaCEPService
@@ -27,7 +30,9 @@ export class Tab1Page {
       this.areaBusca.localidade = JSON.parse(JSON.stringify(value))['localidade'];
       this.areaBusca.uf = JSON.parse(JSON.stringify(value))['uf'];
     });
-    this.pokeAPIService.getPokemonById();
 
+    this.pokeAPIService.getPokemonById().subscribe((pokemon) => {
+      this.pokemon = pokemon;
+    });
   }
 }
