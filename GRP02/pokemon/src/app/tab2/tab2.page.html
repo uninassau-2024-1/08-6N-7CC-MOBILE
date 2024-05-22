@@ -6,6 +6,12 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-fab vertical="bottom" horizontal="center" slot="fixed">
+  <ion-fab-button (click)="addPhotoToGallery()">
+    <ion-icon name="camera"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -13,11 +19,23 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button (click)="addPhotoToGallery()">
-      <ion-icon name="camera"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-card *ngIf="pokemon">
+    <ion-card-header>
+      <ion-card-title>{{ pokemon.name | uppercase }}</ion-card-title>
+      <ion-img [src]="pokemon.sprites.other['dream_world']['front_default']" alt="{{ pokemon.name }}"></ion-img>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>Abilities: {{ pokemon.abilities.length }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Height: {{ pokemon.height }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Weight: {{ pokemon.weight }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

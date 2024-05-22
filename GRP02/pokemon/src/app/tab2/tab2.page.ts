@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { PokeAPIService } from '../services/poke-api.service';
 import { PhotoService } from '../services/photo.service';
 
 @Component({
@@ -6,12 +7,25 @@ import { PhotoService } from '../services/photo.service';
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page {
+export class Tab2Page implements OnInit {
+  pokemon: any = null;
 
-  constructor(public photoService:PhotoService) {}
+  constructor(private pokeAPIService: PokeAPIService,
+    public photoService:PhotoService) {}
+  
   
   addPhotoToGallery(){
     this.photoService.addNewToGallery();
   }
 
+
+  ngOnInit() {
+    this.loadRandomPokemon();
+  }
+
+  loadRandomPokemon() {
+    this.pokeAPIService.getPokemonById().subscribe(pokemon => {
+      this.pokemon = pokemon;
+    });
+  }
 }
