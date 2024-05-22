@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PokeAPIService } from '../services/poke-api.service';
-import { PhotoService } from '../services/photo.service';
+import { PhotoService } from "../services/photo.service";
 
 @Component({
   selector: 'app-tab2',
@@ -18,8 +18,13 @@ export class Tab2Page implements OnInit {
     this.photoService.addNewToGallery();
   }
 
-
   ngOnInit() {
+    // Inicialmente carrega um Pokémon
+    this.loadRandomPokemon();
+  }
+
+  ionViewWillEnter() {
+    // Carrega um novo Pokémon cada vez que a tab é acessada
     this.loadRandomPokemon();
   }
 
