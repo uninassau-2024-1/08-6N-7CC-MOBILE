@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Pokedéx
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+    <ion-title size="large">Pokedéx</ion-title>
+  </ion-toolbar>
+  </ion-header>
+
+<ion-grid>
+  <ion-row>
+    <ion-col><ion-card>
+      <ion-card-title> {{this.pokemon1.name | uppercase}}</ion-card-title>
+      <ion-card-content>
+        <ion-img alt= {{this.pokemon1.name}}
+        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/{{this.pokemon1.id}}.svg">
+      </ion-img>
+      <ion-chip color="success">Vitoria:  {{this.resultadoPoke1.vitoria}}</ion-chip>
+      <ion-chip color="danger">Derrota: {{this.resultadoPoke1.derrota}}</ion-chip>
+      <ion-chip color="warning">Empate:  {{this.resultadoPoke1.empate}}</ion-chip>
+      </ion-card-content>
+    </ion-card></ion-col>
+
+
+
+    <ion-col><ion-card>
+      <ion-card-title> {{this.pokemon2.name | uppercase}}</ion-card-title>
+      <ion-card-content>
+        <ion-img alt= {{this.pokemon1.name}}
+        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/{{this.pokemon2.id}}.svg">
+      </ion-img>
+      <ion-chip color="success">Vitoria: {{this.resultadoPoke2.vitoria}}</ion-chip>
+      <ion-chip color="danger">Derrota: {{this.resultadoPoke2.derrota}}</ion-chip>
+      <ion-chip color="warning">Empate: {{this.resultadoPoke2.empate}}</ion-chip>
+      </ion-card-content>
+    </ion-card></ion-col>
+
+  </ion-row>
+</ion-grid>
+</ion-content>
