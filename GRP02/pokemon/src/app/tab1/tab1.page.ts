@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PokeAPIService } from '../services/poke-api.service';
 import { ViaCEPService } from '../services/via-cep.service';
 import { SharedService } from '../services/shared.service';
+import { PokedexService } from '../services/pokedex.service';
 
 @Component({
   selector: 'app-tab1',
@@ -21,7 +22,8 @@ export class Tab1Page {
   constructor(
     private pokeAPIService: PokeAPIService,
     private viaCEPService: ViaCEPService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private pokedexService: PokedexService
   ) {}
 
   buscarPokemon() {
@@ -34,7 +36,8 @@ export class Tab1Page {
     
     this.pokeAPIService.getPokemonById().subscribe(pokemon => {
       this.pokemon = pokemon;
-      this.sharedService.setTab1Pokemon(pokemon); // Save the Pokemon data in the shared service
+      this.sharedService.setTab1Pokemon(pokemon);
+      this.pokedexService.addPokemon(pokemon, 'Ganhou'); // Exemplo de captura, resultado pode variar
     });
   }
 }
