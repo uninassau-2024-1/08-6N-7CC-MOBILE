@@ -32,8 +32,8 @@
   <ion-card *ngIf="pokemon">
     <ion-card-header>
       <ion-card-title>{{ pokemon.name | uppercase }}</ion-card-title>
-      <ion-img [src]="pokemon.sprites.other['dream_world']['front_default']" alt="{{ pokemon.name }}"></ion-img>
     </ion-card-header>
+    <ion-img [src]="pokemon.sprites.other['dream_world']['front_default']" alt="{{ pokemon.name }}"></ion-img>
     <ion-card-content>
       <ion-list>
         <ion-item>
