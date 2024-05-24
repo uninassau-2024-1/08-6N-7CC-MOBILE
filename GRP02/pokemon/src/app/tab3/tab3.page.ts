@@ -12,6 +12,14 @@ export class Tab3Page implements OnInit {
   constructor(private pokedexService: PokedexService) {}
 
   ngOnInit() {
+    this.loadPokedex();
+  }
+
+  ionViewWillEnter() {
+    this.loadPokedex();
+  }
+
+  loadPokedex() {
     this.pokedex = this.pokedexService.getPokedex();
   }
 }

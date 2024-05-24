@@ -37,7 +37,7 @@ export class Tab1Page {
     this.pokeAPIService.getPokemonById().subscribe(pokemon => {
       this.pokemon = pokemon;
       this.sharedService.setTab1Pokemon(pokemon);
-      this.pokedexService.addPokemon(pokemon, 'Ganhou'); // Exemplo de captura, resultado pode variar
+      this.pokedexService.addPokemon(pokemon,'',true); // Exemplo de captura, resultado pode variar
     });
   }
 }

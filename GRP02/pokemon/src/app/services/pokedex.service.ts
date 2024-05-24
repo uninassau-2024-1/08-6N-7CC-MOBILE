@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class PokedexService {
   private pokedex: any[] = [];
 
-  addPokemon(pokemon: any, result: string) {
+  addPokemon(pokemon: any, result: string, fromTab1: boolean = false) {
     const existingPokemon = this.pokedex.find(p => p.id === pokemon.id);
     if (existingPokemon) {
       if (result === 'Ganhou') {
@@ -16,6 +16,9 @@ export class PokedexService {
       } else if (result === 'Empate') {
         existingPokemon.draws += 1;
       }
+      if (fromTab1) {
+        existingPokemon.fromTab1 = true;
+      }
     } else {
       this.pokedex.push({
         id: pokemon.id,
@@ -24,11 +27,12 @@ export class PokedexService {
         wins: result === 'Ganhou' ? 1 : 0,
         losses: result === 'Perdeu' ? 1 : 0,
         draws: result === 'Empate' ? 1 : 0,
+        fromTab1: fromTab1
       });
     }
   }
 
   getPokedex() {
-    return this.pokedex;
+    return this.pokedex.filter(pokemon => pokemon.fromTab1);
   }
 }

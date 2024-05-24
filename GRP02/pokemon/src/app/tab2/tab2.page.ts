@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PokeAPIService } from '../services/poke-api.service';
 import { SharedService } from '../services/shared.service';
 import { PhotoService } from '../services/photo.service';
+import { PokedexService } from '../services/pokedex.service';
 
 @Component({
   selector: 'app-tab2',
@@ -13,13 +14,12 @@ export class Tab2Page implements OnInit {
   resultText: string = '';
   resultColor: string = '';
 
-  constructor(private pokeAPIService: PokeAPIService,
-    public photoService:PhotoService, private sharedService: SharedService) {}
-  
-  
-  addPhotoToGallery(){
-    this.photoService.addNewToGallery();
-  }
+  constructor(
+    private pokeAPIService: PokeAPIService,
+    public photoService: PhotoService,
+    private sharedService: SharedService,
+    private pokedexService: PokedexService
+  ) {}
 
   ngOnInit() {
     this.loadRandomPokemon();
@@ -27,6 +27,10 @@ export class Tab2Page implements OnInit {
 
   ionViewWillEnter() {
     this.loadRandomPokemon();
+  }
+
+  addPhotoToGallery() {
+    this.photoService.addNewToGallery();
   }
 
   loadRandomPokemon() {
@@ -45,12 +49,18 @@ export class Tab2Page implements OnInit {
       if (tab1Abilities === tab2Abilities) {
         this.resultText = 'Empate';
         this.resultColor = 'yellow';
+        this.pokedexService.addPokemon(tab1Pokemon, 'Empate');
+        this.pokedexService.addPokemon(this.pokemon, 'Empate');
       } else if (tab2Abilities > tab1Abilities) {
         this.resultText = 'Ganhou';
         this.resultColor = 'red';
+        this.pokedexService.addPokemon(tab1Pokemon, 'Perdeu');
+        this.pokedexService.addPokemon(this.pokemon, 'Ganhou');
       } else {
         this.resultText = 'Perdeu';
         this.resultColor = 'green';
+        this.pokedexService.addPokemon(tab1Pokemon, 'Ganhou');
+        this.pokedexService.addPokemon(this.pokemon, 'Perdeu');
       }
     }
   }
