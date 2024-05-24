@@ -1,0 +1,30 @@
+<!--
+<ion-card  style="margin-top: 300px;">
+  <ion-card-content>
+    <ion-label>Relatório</ion-label>
+    <ion-item>Senhas Emitidas: {{senhasService.senhasTotal}}</ion-item>
+    <ion-item>Senhas Geral: {{senhasService.senhasGeral}}</ion-item>
+    <ion-item>Senhas Prioritárias: {{senhasService.senhasPrior}}</ion-item>
+    <ion-item>Senhas Exames: {{senhasService.senhasExame}}</ion-item>
+  </ion-card-content>
+</ion-card>
+ -->
+
+ <ion-card style="margin-top: 100px;" *ngFor="let relatorio of relatorios">
+  <ion-card-content>
+    <ion-label>Relatório</ion-label>
+    <ion-item>Data do Relatório: {{ relatorio.dataRelatorio | date:'MM-dd' }}</ion-item>
+    <ion-item>Senhas Emitidas: {{ relatorio.qtdSenhasEmitidas }}</ion-item>
+    <ion-item>Senhas Atendidas: {{ relatorio.qtdSenhasAtendidas }}</ion-item>
+    <ion-item>Senhas Emitidas SP: {{ relatorio.qtdSenhasEmitidasSP }}</ion-item>
+    <ion-item>Senhas Atendidas SP: {{ relatorio.qtdSenhasAtendidasSP }}</ion-item>
+    <ion-item>Senhas Emitidas SG: {{ relatorio.qtdSenhasEmitidasSG }}</ion-item>
+    <ion-item>Senhas Atendidas SG: {{ relatorio.qtdSenhasAtendidasSG }}</ion-item>
+    <ion-item>Senhas Emitidas SE: {{ relatorio.qtdSenhasEmitidasSE }}</ion-item>
+    <ion-item>Senhas Atendidas SE: {{ relatorio.qtdSenhasAtendidasSE }}</ion-item>
+    <ion-item>Tempo Médio de Atendimento SP: {{ relatorio.tempoMedioAtendimentoSP }} minutos</ion-item>
+    <ion-item>Tempo Médio de Atendimento SG: {{ relatorio.tempoMedioAtendimentoSG }} minutos</ion-item>
+    <ion-item>Tempo Médio de Atendimento SE: {{ relatorio.tempoMedioAtendimentoSE }} minutos</ion-item>
+  </ion-card-content>
+</ion-card>
+
