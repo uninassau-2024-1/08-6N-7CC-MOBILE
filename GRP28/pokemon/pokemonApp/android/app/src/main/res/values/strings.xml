@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">pokemonApp</string>
-    <string name="title_activity_main">pokemonApp</string>
-    <string name="package_name">pokemonApp.com</string>
-    <string name="custom_url_scheme">pokemonApp.com</string>
-</resources>
