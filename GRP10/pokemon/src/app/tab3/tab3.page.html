@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Pokedéx
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Pokedéx</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let pokemon of pokemons">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{pokemon.name | uppercase}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <img [src]="pokemon.front_default" alt="Pokemon Image">
+            <p>Wins: <span color="success">{{pokemon.wins}}</span></p>
+            <p>Losses: <span color="danger">{{pokemon.losses}}</span></p>
+            <p>Draws: <span color="warning">{{pokemon.draws}}</span></p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

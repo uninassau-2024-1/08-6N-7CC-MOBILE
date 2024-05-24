@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title size="large" class="ion-text-center">Painel</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Painel</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-list>
+        <ion-item>
+          <h1>Última senha: {{lastAttendanceIsTrue.password}}</h1>
+        </ion-item>
+      </ion-list>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button expand="block" (click)="callPassword()">Chamar senha</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-list *ngFor="let password of allPasswords">
+        <ion-item>{{password.password}}</ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
