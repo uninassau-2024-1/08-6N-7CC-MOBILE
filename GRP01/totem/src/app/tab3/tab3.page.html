@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title size="large" class="ion-text-center">Métricas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Métricas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>Senhas emitidas: {{metrics.totalGenerated}}</ion-item>
+        <ion-item>Senhas atendidas: {{metrics.totalAttendance}}</ion-item>
+
+        <ion-item>Total emitidas Geral: {{metrics.formattedGenericResults.SG}}</ion-item>
+        <ion-item>Total emitidas Prioritária: {{metrics.formattedGenericResults.SP}}</ion-item>
+        <ion-item>Total emitidas Exame: {{metrics.formattedGenericResults.SE}}</ion-item>
+
+        <ion-item>Total atendidas Geral: {{metrics.formattedAttendanceResults.SG}}</ion-item>
+        <ion-item>Total atendidas Prioritária: {{metrics.formattedAttendanceResults.SP}}</ion-item>
+        <ion-item>Total atendidas Exame: {{metrics.formattedAttendanceResults.SE}}</ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
