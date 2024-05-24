@@ -18,7 +18,7 @@ export class Tab3Page implements OnInit {
     weight: ''
   };
   constructor(
-    private pokeAPIService: PokeAPIService,
+    public pokeAPIService: PokeAPIService,
     private sharedService: SharedService
   ) { }
 

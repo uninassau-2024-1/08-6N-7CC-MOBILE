@@ -45,5 +45,7 @@ export class Tab1Page {
       this.pokemon.weight = JSON.parse(JSON.stringify(value))['weight'];
       this.sharedService.updatePokemon(this.pokemon);
     });
+    this.pokeAPIService.pokemonPokedex.push(this.pokemon);
+    console.log(this.pokeAPIService.pokemonPokedex);
   }
 }
