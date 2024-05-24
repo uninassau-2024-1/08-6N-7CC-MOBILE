@@ -13,9 +13,26 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-grid>
+  <!-- <ion-grid>
     <ion-row>
       <ion-col *ngFor="let pokemon of pokemons">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{pokemon.name | uppercase}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <img [src]="pokemon.front_default" alt="Pokemon Image">
+            <p>Wins: <span color="success">{{pokemon.wins}}</span></p>
+            <p>Losses: <span color="danger">{{pokemon.losses}}</span></p>
+            <p>Draws: <span color="warning">{{pokemon.draws}}</span></p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let pokemon of this.pokeApiService.pokemonPokedex">
         <ion-card>
           <ion-card-header>
             <ion-card-title>{{pokemon.name | uppercase}}</ion-card-title>

@@ -9,27 +9,31 @@ import { PokeAPIService } from '../services/poke-api.service';
 export class Tab3Page implements OnInit {
   pokemons: any[] = [];
 
-  constructor(private pokeApiService: PokeAPIService) { }
+  constructor(public pokeApiService: PokeAPIService) { }
 
   ngOnInit() {
     this.loadPokemonData();
   }
 
   loadPokemonData() {
-    this.pokeApiService.getPokeAPIService().subscribe((data: any) => {
-      const results = data.results;
+    this.pokeApiService
+      .getPokeAPIService('https://pokeapi.co/api/v2/pokemon?limit=100')
+      .subscribe((data: any) => {
+        const results = data.results;
 
-      results.forEach((pokemon: any) => {
-        this.pokeApiService.getPokemonDetails(pokemon.url).subscribe((details: any) => {
-          this.pokemons.push({
-            name: details.name,
-            front_default: details.sprites.front_default,
-            wins: 0, // Valores iniciais
-            losses: 0,
-            draws: 0
-          });
+        results.forEach((pokemon: any) => {
+          this.pokeApiService
+            .getPokemonDetails(pokemon.url)
+            .subscribe((details: any) => {
+              this.pokemons.push({
+                name: details.name,
+                front_default: details.sprites.front_default,
+                wins: 0, // Valores iniciais
+                losses: 0,
+                draws: 0,
+              });
+            });
         });
       });
-    });
   }
 }

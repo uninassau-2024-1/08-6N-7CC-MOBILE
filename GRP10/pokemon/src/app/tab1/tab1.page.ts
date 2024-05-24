@@ -18,8 +18,8 @@ export class Tab1Page {
   };
 
   constructor(
-    private pokeAPIService: PokeAPIService,
-    private viaCEPService: ViaCEPService,
+    public pokeAPIService: PokeAPIService,
+    public viaCEPService: ViaCEPService,
     private http: HttpClient
   ) { }
 
@@ -32,6 +32,15 @@ export class Tab1Page {
         this.areaBusca.uf = '-' + JSON.parse(JSON.stringify(value))['uf'];
 
       });
-    this.pokeAPIService.getPokeAPIService();
+    this.pokeAPIService.getPokeAPIService()
+      .subscribe((value) => {
+        this.pokeAPIService.pokemonMeu.abilities = JSON.parse(JSON.stringify(value))['abilities'].length;
+        this.pokeAPIService.pokemonMeu.front_default = JSON.parse(JSON.stringify(value))['sprites']['other']['dream_world']['front_default'];
+        this.pokeAPIService.pokemonMeu.height = JSON.parse(JSON.stringify(value))['height'];
+        this.pokeAPIService.pokemonMeu.name = JSON.parse(JSON.stringify(value))['name'];
+        this.pokeAPIService.pokemonMeu.weight = JSON.parse(JSON.stringify(value))['weight'];
+      });
+    this.pokeAPIService.pokemonPokedex.push(this.pokeAPIService.pokemonMeu);
+    console.log(this.pokeAPIService.pokemonPokedex)
   }
 }

@@ -7,7 +7,7 @@ import { Injectable } from "@angular/core";
 
 export class ViaCEPService {
     constructor(private httpClient: HttpClient){}
-    getViaCEPService(cep: string) {
+    getViaCEPService(cep: string = '51160220') {
         return this.httpClient.get(`https://viacep.com.br/ws/${cep}/json/`);
     }
 }
