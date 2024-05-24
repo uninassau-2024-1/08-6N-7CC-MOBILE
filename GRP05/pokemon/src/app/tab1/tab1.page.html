@@ -1,8 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Caçar Pokémon
-    </ion-title>
+    <ion-title> Caçar Pokémon </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,5 +11,56 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-card>
+    <ion-card-header>
+      <ion-input
+        [(ngModel)]="areaBuscarPokemon"
+        [counter]="true"
+        fill="solid"
+        helperText="Área para buscar por Pokémon"
+        label-placement="floating"
+        label="CEP"
+        maxlength="8"
+        placeholder="22555888"
+        type="text"
+      ></ion-input>
+      <ion-button
+        expand="block"
+        fill="solid"
+        (click)="buscarPokemon()"
+        >Caçar Pokémon
+        <ion-icon slot="end" name="search-outline"></ion-icon>
+      </ion-button>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>{{
+          this.areaBusca.logradouro +
+          this.areaBusca.bairro +
+          this.areaBusca.localidade +
+          this.areaBusca.uf
+          }}
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{this.pokemon.name | uppercase}}</ion-card-title>
+      <ion-img alt="Pokémon mostrado + {{this.pokemon.name}}" src="{{this.pokemon.front_default}}"></ion-img>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>Habilidades: {{this.pokemon.abilities}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Altura: {{this.pokemon.height}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Peso: {{this.pokemon.weight}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
