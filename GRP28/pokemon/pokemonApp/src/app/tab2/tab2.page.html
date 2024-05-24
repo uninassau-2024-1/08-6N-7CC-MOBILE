@@ -1,0 +1,88 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Batalha
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-card  *ngIf="pokemonEnemy">
+    <ion-card-header>
+      <ion-card-title>
+        {{pokemonEnemy.name | uppercase}}
+      </ion-card-title>
+      <div *ngIf="pokemon">
+        <ion-card-subtitle *ngIf="pokemonEnemy.abilities.length > pokemon.abilities"
+          style="color: red; font-size: 16px">Perdeu</ion-card-subtitle>
+        <ion-card-subtitle *ngIf="pokemonEnemy.abilities.length < pokemon.abilities"
+          style="color: green; font-size: 16px">Ganhou</ion-card-subtitle>
+        <ion-card-subtitle *ngIf="pokemonEnemy.abilities.length === pokemon.abilities"
+          style="color: #c3c338; font-size: 16px">Empate</ion-card-subtitle>
+      </div>
+      <div style="display: flex; justify-content: center;">
+        <ion-img style="width: 60%;" src={{pokemonEnemy.sprites.other.dream_world.front_default}}></ion-img>
+      </div>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label> Abilities: {{pokemonEnemy.abilities.length}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label> Heigth: {{pokemonEnemy.height}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label> Weigth: {{pokemonEnemy.weight}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <div *ngIf="pokemons.length>0" style="display: flex; justify-content: center; align-items: center;">
+    <ion-button (click)="proximaBatalha()">
+      Proxima Batalha
+    </ion-button>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button (click)="addPhotoToGallery()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+
+
+<ion-modal trigger="open-modal" style=" overflow-x: scroll !important;" #modal>
+  <ng-template>
+    <ion-card>
+      <ion-card></ion-card>
+      <ion-card-header>
+        <ion-toolbar>
+          <ion-title style="font-size: 18px;">Escolha seu pokemon para batalhar: </ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="fecharModal()">X</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-card-header>
+      <ion-card-content class="ion-padding">
+        <ion-list>
+          <ion-item class="card-meus-pokemom" *ngFor="let pokemon of pokemonsPaginados" (click)="escolhoEssePokemon(pokemon)">
+            <ion-img src={{pokemon.urlPixelado}}></ion-img>
+            <ion-label>{{pokemon.nome}}</ion-label>
+            <ion-label>Abilities: {{pokemon.abilities}}</ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-row style="display: flex; justify-content: space-between;">
+          <ion-col>
+            <ion-button (click)="paginaAnterior()" [disabled]="paginaAtual === 1"><</ion-button>
+          </ion-col>
+          <ion-col style="text-align: right;" >
+            <ion-button (click)="proximaPagina()" [disabled]="(paginaAtual * qtdPokemonPorPagina) >= pokemons.length">></ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+</ion-modal>

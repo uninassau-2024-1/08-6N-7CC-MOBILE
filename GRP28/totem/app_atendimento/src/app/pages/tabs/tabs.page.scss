@@ -1,0 +1,42 @@
+.custom-header {
+  --background:#fff;
+  --ion-color-base: #ffffff;
+  border: none !important;
+
+  ion-toolbar {
+    --background: var(--background);
+    --color: var(--ion-color-base);
+    --ion-color-base: var(--ion-color-base);
+    --border-color: transparent;
+    --box-shadow: none;
+  }
+
+  // .logo {
+  //   width: 70%;
+  //   height: 100px;
+  //   max-width: 300px;
+  // }
+}
+
+.custom-tab-bar {
+  --background: #fff;
+
+  --ion-color-base: #4facfe;
+
+  ion-tab-button {
+    --color-selected: #787878;
+    --color: var(--ion-color-base);
+    --border-radius: 0;
+    --border-width: 0;
+    --border-color: transparent;
+
+
+    ion-icon {
+      font-size: 24px;
+    }
+
+    ion-label {
+      font-size: 14px;
+    }
+  }
+}

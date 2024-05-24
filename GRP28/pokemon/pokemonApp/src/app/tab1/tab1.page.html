@@ -1,0 +1,66 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Buscar Pokemon
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Buscar Pokemon</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+<ion-card >
+  <ion-card-header>
+    <ion-input [(ngModel)]="areaBuscarPokemon" [counter]="true" fill="solid" helperText="Área para buscar por pokémon" (ionInput)="onInput($event)"
+      label="CEP" maxlength="8" placeholder="22555888" type="text"></ion-input>
+    <ion-button expand="block" fill="solid" (click)="buscarPokemon(areaBuscarPokemon)">
+      Buscar po Pokemon
+      <ion-icon name="search" slot="end"></ion-icon>
+    </ion-button>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <ion-item *ngIf="areaBusca">
+        {{areaBusca.logradouro}},  {{areaBusca.bairro}} - {{areaBusca.localidade }}/{{areaBusca.uf}}
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>
+
+
+<ion-card *ngIf="pokemon">
+  <ion-card-header>
+    <ion-card-title>
+      {{pokemon.nome | uppercase}}
+    </ion-card-title>
+    <div style="display: flex; justify-content: center;">
+      <ion-img style="width: 60%;" src={{pokemon.url}}></ion-img>
+    </div>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <ion-item>
+        <ion-label> Abilities: {{pokemon.abilities}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label> Heigth: {{pokemon.height}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label> Weigth: {{pokemon.weight}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+  <ion-card-subtitle style="font-size: 16px;">
+    Deseja capturar esse pokemon?
+  </ion-card-subtitle>
+  <ion-button (click)="capturarPokemon()">Sim</ion-button>
+  <ion-button (click)="naoQueroOPokemon()" color="danger">Não</ion-button>
+</ion-card>
+
+
+</ion-content>

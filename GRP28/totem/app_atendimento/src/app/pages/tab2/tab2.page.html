@@ -1,0 +1,32 @@
+
+
+<div class="painel-container">
+  <h2>Painel de Chamada</h2>
+  <ion-card-content *ngIf="senha" class="senha-chamada {{ senha.tipoSenha ? senha.tipoSenha : 'inexistente' }}">
+    <ion-label>Tipo: {{ senha.tipoSenha }}</ion-label>
+    <ion-label>Senha: {{ senha.numeroSenha }}</ion-label>
+    <ion-label></ion-label>
+  </ion-card-content>
+  <ion-card-content *ngFor="let senha of senhas"
+    class="proxima-senha {{ senha.tipoSenha ? senha.tipoSenha : 'inexistente' }}">
+    <ion-label>Tipo: {{ senha.tipoSenha }}</ion-label>
+    <ion-label>Senha: {{ senha.numeroSenha }}</ion-label>
+    <ion-label></ion-label>
+  </ion-card-content>
+
+  <ion-button (click)="atender(senha)" [disabled]="guichesDisponiveis()">
+    Atender
+  </ion-button>
+
+    <h6>LOG ATENDIMENTO:</h6>
+
+    <div *ngFor="let guiche of guiches" style="text-align: start;">
+      <div *ngIf="guiche.statusDisponibilidade === 'D'">
+        <span>Guichê {{guiche.numeroGuiche}} Disponivel</span>
+        <br>
+      </div>
+      <div *ngIf="guiche.statusDisponibilidade === 'I'">
+        <span>Guichê {{guiche.numeroGuiche}} Indisponível por {{guiche.tempo}} minutos</span>
+        <br>
+      </div>
+    </div>

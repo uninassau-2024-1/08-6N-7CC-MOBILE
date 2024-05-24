@@ -1,0 +1,47 @@
+.cliente-custom-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  &-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 16px;
+
+    .cliente-title {
+      margin-bottom: 12px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .cliente-password {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      padding: 12px 24px;
+      font-size: 24px;
+      max-width: 250px;
+      width: 100%;
+    }
+
+    ion-button {
+      --background: #1ED7FE;
+      --color: #fff;
+      --border-radius: 20px;
+      --padding: 12px 24px;
+      --min-width: 200px;
+      font-size: 16px;
+      width: 100%;
+      max-width: 250px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-top: 12px;
+
+      &:hover {
+        --background: #1CDAFF;
+      }
+    }
+  }
+}

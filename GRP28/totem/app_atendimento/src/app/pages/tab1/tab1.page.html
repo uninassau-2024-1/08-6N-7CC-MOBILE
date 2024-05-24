@@ -1,0 +1,11 @@
+<ion-card class="cliente-custom-card cliente-card" style="margin-top: 300px;">
+  <ion-card-header class="cliente-custom-card-header cliente-card-header">
+    <div class="cliente-title">Escolha sua senha:</div>
+  </ion-card-header>
+  <ion-card-content class="cliente-custom-card-content cliente-card-content">
+    <div class="cliente-password">senha: <br>{{inputNovaSenha}}</div>
+    <ion-button (click)="gerarSenha('geral')" class="cliente-custom-button cliente-button">Senha Geral</ion-button>
+    <ion-button (click)="gerarSenha('exame')" class="cliente-custom-button cliente-button">Senha Exame</ion-button>
+    <ion-button (click)="gerarSenha('prioridade')" class="cliente-custom-button cliente-button">Senha Prioridade</ion-button>
+  </ion-card-content>
+</ion-card>

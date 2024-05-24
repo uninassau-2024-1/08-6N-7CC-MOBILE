@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Meu Pokedex
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  [fullscreen]="true" >
+  <div style="height: 89vh; display: flex; align-items: center; justify-content: center;" *ngIf="pokemonsPaginados.length <= 0">
+    <img src="./assets/pikachu-not-found.png" alt="No Pokémon" style="max-width: 100%; height: auto;">
+  </div>
+<div *ngIf="pokemonsPaginados.length >0" style="height: 89vh; vertical-align: middle; align-content: center;">
+
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Pokedex</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid >
+    <ion-row>
+      <ion-col  *ngFor="let pokemon of pokemonsPaginados">
+        <ion-card>
+          <ion-card-content>
+            <ion-card-title>{{pokemon.nome}}</ion-card-title>
+            <ion-img [src]="pokemon.urlPixelado"></ion-img>
+            <ion-label style="color: green; font-size: 16px">Vitórias: {{pokemon.qtdVitoria}}</ion-label><br>
+            <ion-label style="color: red; font-size: 16px">Derrotas: {{pokemon.qtdDerrota}}</ion-label><br>
+            <ion-label style="color: #c3c338; font-size: 16px">Empates: {{pokemon.qtdEmpate}}</ion-label><br>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-row style="display: flex; justify-content: space-between;">
+    <ion-col>
+      <ion-button (click)="paginaAnterior()" [disabled]="paginaAtual === 1"><</ion-button>
+    </ion-col>
+    <ion-col style="text-align: right;" >
+      <ion-button (click)="proximaPagina()" [disabled]="(paginaAtual * qtdPokemonPorPagina) >= pokemons.length">></ion-button>
+    </ion-col>
+  </ion-row>
+</div>
+
+
+</ion-content>
+
+
