@@ -31,7 +31,7 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/global.scss", "src/theme/variables.scss"],
+            "styles": ["src/theme/variables.scss", "src/global.scss"],
             "scripts": []
           },
           "configurations": {
@@ -74,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "app:build:production"
+              "browserTarget": "app:build:production"
             },
             "development": {
-              "buildTarget": "app:build:development"
+              "browserTarget": "app:build:development"
             },
             "ci": {
               "progress": false
@@ -88,7 +88,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "app:build"
+            "browserTarget": "app:build"
           }
         },
         "test": {
@@ -111,7 +111,7 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/global.scss", "src/theme/variables.scss"],
+            "styles": ["src/theme/variables.scss", "src/global.scss"],
             "scripts": []
           },
           "configurations": {
@@ -137,7 +137,7 @@
     "schematicCollections": [
       "@ionic/angular-toolkit"
     ],
-    "analytics": "1022c424-8b61-448d-897c-baa5429281b5"
+    "analytics": false
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {

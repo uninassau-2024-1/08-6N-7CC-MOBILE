@@ -1,36 +1,21 @@
-import { Component } from '@angular/core';
-import { PokedexService } from '../services/Pokedex/pokedex.service';
-import { AlertController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { SharedDataService } from '../services/shared-data.service';
 
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
-export class Tab3Page {
+export class Tab3Page implements OnInit {
+  pokemons: any[] = [];
 
-  constructor(
-    public pokedexService: PokedexService,
-    private alertController: AlertController,
-  ) {}
+  constructor(private sharedDataService: SharedDataService) { }
 
-  ionViewDidEnter() {
-    this.checkForPokemons();
+  ngOnInit() {
+    this.pokemons = this.sharedDataService.getPokemons();
   }
 
-  checkForPokemons(){
-    if (this.pokedexService.dexPokemons.length === 0) {
-      this.presentAlertNoPokemon();
-    }
-  }
-
-  async presentAlertNoPokemon() {
-    const alert = await this.alertController.create({
-      header: 'Nenhum Pokémon capturado!',
-      message: 'Por favor, capture um Pokémon antes de verificar a Pokédex.',
-      buttons: ['OK'],
-    });
-
-    await alert.present();
+  ionViewWillEnter() {
+    this.pokemons = this.sharedDataService.getPokemons();
   }
 }

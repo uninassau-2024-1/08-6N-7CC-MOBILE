@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { PhotoService } from '../services/Photo/photo.service';
-import { PokeAPIService } from '../services/PokeAPI/poke-api.service';
-import { NavController } from '@ionic/angular';
+import { SharedDataService } from '../services/shared-data.service';
+import { PokeAPIService } from '../services/poke-api.service';
+import { PhotoService } from '../services/photo.service';
 
 @Component({
   selector: 'app-tab2',
@@ -9,47 +9,66 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-
-  resultado: string = '';
-  cor: string = '';
+  pokemon: any = {
+    name: '',
+    front_default: '',
+    abilities: 0,
+    height: '',
+    weight: ''
+  };
+  pokemon2: any = {
+    name: '',
+    front_default: '',
+    abilities: 0,
+    height: '',
+    weight: ''
+  };
+  comparisonResult: { color: string, text: string } = { color: '', text: '' };
 
   constructor(
-    public photoService: PhotoService,
-    public pokeAPIService: PokeAPIService,
-    public navController: NavController,
-  ) {}
+    private sharedDataService: SharedDataService,
+    private pokeAPIService: PokeAPIService,
+    private photoService: PhotoService
+  ) { }
 
+  ionViewWillEnter() {
+    this.pokemon = this.sharedDataService.getPokemon();
+    this.buscarPokemon2();
+  }
+
+  buscarPokemon2() {
+    this.pokeAPIService.getPokeAPIService()
+      .subscribe((value: any) => {
+        this.pokemon2.name          = value.name;
+        this.pokemon2.front_default = value.sprites.other.dream_world.front_default;
+        this.pokemon2.abilities     = value.abilities.length;
+        this.pokemon2.height        = value.height;
+        this.pokemon2.weight        = value.weight;
+        this.compareAbilities();
+      });
+  }
+
+  compareAbilities() {
+    if (this.pokemon2.abilities === this.pokemon.abilities) {
+      this.comparisonResult = { color: 'yellow', text: 'Empatou' };
+      this.pokemon.draws++;
+      this.pokemon2.draws++;
+    } else if (this.pokemon2.abilities > this.pokemon.abilities) {
+      this.comparisonResult = { color: 'green', text: 'Venceu' };
+      this.pokemon.losses++;
+      this.pokemon2.wins++;
+    } else {
+      this.comparisonResult = { color: 'red', text: 'Perdeu' };
+      this.pokemon.wins++;
+      this.pokemon2.losses++;
+    }
+
+    this.sharedDataService.updatePokemon(this.pokemon);
+    this.sharedDataService.updatePokemon(this.pokemon2);
+  }
 
   addPhotoToGallery() {
     this.photoService.addNewToGallery();
   }
-
-  ionViewDidEnter() {
-    this.buscarPokemon();
-  }
-
-  pokemon: any = {
-    nome: '',
-    img: '',
-    habilidade: '',
-    altura: '',
-    peso: ''
-  }
-
-  buscarPokemon(){
-    this.pokeAPIService.getPokeAPIService().subscribe((value) => {
-      this.pokemon.nome = JSON.parse(JSON.stringify(value)) ['name'];
-      this.pokemon.img = JSON.parse(JSON.stringify(value)) ['id'];
-      this.pokemon.habilidade = (JSON.parse(JSON.stringify(value)) ['abilities']).length -1;
-      this.pokemon.altura = JSON.parse(JSON.stringify(value)) ['height'];
-      this.pokemon.peso = JSON.parse(JSON.stringify(value)) ['weight'];
-    });
-
-    this.pokeAPIService.setTab2Habilidade(parseInt(this.pokemon.habilidade));
-    this.pokeAPIService.batalhar();
-    this.resultado = this.pokeAPIService.resultado;
-    this.cor = this.pokeAPIService.cor
-
-  }
-
 }
+

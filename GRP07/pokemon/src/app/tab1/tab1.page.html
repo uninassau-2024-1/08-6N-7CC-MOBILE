@@ -19,8 +19,8 @@
         [(ngModel)]="areaBuscarPokemon"
         [counter]="true"
         fill="solid"
-        helperText="Área para buscar por Pokemon"
-        labelPlacement="floating"
+        helperText="Área para buscar por Pokémon"
+        label-placement="floating"
         label="CEP"
         maxlength="8"
         placeholder="22555888"
@@ -31,42 +31,39 @@
         fill="solid"
         (click)="buscarPokemon()"
       >
-        Buscar por Pokemon
+        Buscar por Pokémon
         <ion-icon name="search" slot="end"></ion-icon>
       </ion-button>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
         <ion-item>{{
-        this.areaBusca.logradouro +  
-        this.areaBusca.bairro +
-        this.areaBusca.uf
+          areaBusca.logradouro +
+          areaBusca.bairro +
+          areaBusca.localidade +
+          areaBusca.uf
         }}</ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
+  <ion-card *ngIf="pokemon.name">
     <ion-card-header>
-      <ion-card-title style="margin-bottom: 25px;">{{ pokemon.nome | uppercase}}</ion-card-title>
-      <ion-img alt=""
-        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/{{pokemon.img}}.svg">
-      </ion-img>
+      <ion-card-title>{{ pokemon.name | uppercase }}</ion-card-title>
+      <ion-img alt="" [src]="pokemon.front_default"></ion-img>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
         <ion-item>
-          <ion-label>Abilities: {{pokemon.habilidade}}</ion-label>
+          <ion-label>Abilities: {{ pokemon.abilities }}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Height: {{pokemon.altura}}</ion-label>
+          <ion-label>Height: {{ pokemon.height }}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Weigth: {{pokemon.peso}}</ion-label>
+          <ion-label>Weight: {{ pokemon.weight }}</ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
-
-  
 </ion-content>

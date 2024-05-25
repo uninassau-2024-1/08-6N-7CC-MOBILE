@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { PokeAPIService } from '../services/PokeAPI/poke-api.service';
-import { ViaCEPService } from '../services/ViaCEP/via-cep.service';
+import { PokeAPIService } from '../services/poke-api.service';
+import { ViaCEPService } from '../services/via-cep.service';
+import { SharedDataService } from '../services/shared-data.service';
 
 @Component({
   selector: 'app-tab1',
@@ -8,48 +9,60 @@ import { ViaCEPService } from '../services/ViaCEP/via-cep.service';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  areaBuscarPokemon: string = '52011210';
+
+  areaBuscarPokemon: string = '';
   areaBusca: any = {
     bairro: '',
     localidade: '',
     logradouro: '',
     uf: ''
-  };
+  }
 
   pokemon: any = {
-    nome: '',
-    img: '',
-    habilidade: '',
-    altura: '',
-    peso: ''
+    name: '',
+    front_default: '',
+    abilities: '',
+    height: '',
+    weight: '',
+    wins: 0,
+    losses: 0,
+    draws: 0
   }
 
   constructor(
     private pokeAPIService: PokeAPIService,
-    private ViaCEPService: ViaCEPService,
-  ) {}
+    private viaCEPService: ViaCEPService,
+    private sharedDataService: SharedDataService
+  ) { }
 
+  buscarPokemon() {
+    this.viaCEPService.getViaCEPService(this.areaBuscarPokemon)
+      .subscribe((value: any) => {
+        this.areaBusca.logradouro = value.logradouro;
+        this.areaBusca.bairro     = ', ' + value.bairro;
+        this.areaBusca.localidade = ' - ' + value.localidade;
+        this.areaBusca.uf         = '-' + value.uf;
+      });
 
-  buscarPokemon(){
-    this.ViaCEPService.getViaCEPService(this.areaBuscarPokemon).subscribe((value) => {
-      this.areaBusca.logradouro = JSON.parse(JSON.stringify(value)) ['logradouro'];
-      this.areaBusca.bairro = ', ' + JSON.parse(JSON.stringify(value)) ['bairro'];
-      this.areaBusca.localidade = ' - ' + JSON.parse(JSON.stringify(value)) ['localidade'];
-      this.areaBusca.uf = '-' + JSON.parse(JSON.stringify(value)) ['uf'];
-    });
+    this.pokeAPIService.getPokeAPIService()
+      .subscribe((value: any) => {
+        const newPokemon = {
+          name:          value.name,
+          front_default: value.sprites.other.dream_world.front_default,
+          abilities:     value.abilities.length,
+          height:        value.height,
+          weight:        value.weight,
+          wins: 0,
+          losses: 0,
+          draws: 0
+        };
 
-    this.pokeAPIService.getPokeAPIService().subscribe((value) => {
-      this.pokemon.nome = JSON.parse(JSON.stringify(value)) ['name'];
-      this.pokemon.img = JSON.parse(JSON.stringify(value)) ['id'];
-      this.pokemon.habilidade = (JSON.parse(JSON.stringify(value)) ['abilities']).length -1;
-      this.pokemon.altura = JSON.parse(JSON.stringify(value)) ['height'];
-      this.pokemon.peso = JSON.parse(JSON.stringify(value)) ['weight'];
-    });
-
-    this.pokeAPIService.setTab1Habilidade(parseInt(this.pokemon.habilidade));
-    let pokemon = {name: this.pokemon.name, image: this.pokemon.sprites.front_default}
-    
-    
+        this.sharedDataService.addPokemon(newPokemon);
+        this.pokemon = newPokemon;
+      });
   }
 
+  getLastPokemon() {
+    return this.sharedDataService.getLastPokemon();
+  }
 }
