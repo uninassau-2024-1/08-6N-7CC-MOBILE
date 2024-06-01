@@ -1,16 +1,15 @@
 # pokemonapp
+Grupo nós 4 (nome e matrícula):
 
-A new Flutter project.
+Pablo Henrique Brito
+01430402
 
-## Getting Started
+Juan Passos
+01427880
 
-This project is a starting point for a Flutter application.
+Diego Lima
+01401412
 
-A few resources to get you started if this is your first Flutter project:
+Dayvison Freitas
+01424216
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
