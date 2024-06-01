@@ -1,8 +1,16 @@
-<h1>Grupo Nós 4 - CC 7º Noite</h1>
+# pokemonapp
 
-<h2>Integrantes</h2>
+A new Flutter project.
 
-<p>Diego Lima - 01401412</p>
-<p>Pablo Henrique - 01430402</p>
-<p>Dayvison Freitas - 01424216</p>
-<p>Juan Passos - 01427880</p>
+## Getting Started
+
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
