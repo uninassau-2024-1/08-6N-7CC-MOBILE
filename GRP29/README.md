@@ -1,5 +1,7 @@
 # Alunos
 
+* Vitória Nathaly Gomes de Oliveria - 01482475
+* André Crispim de Oliveira - 01008087
 * Diego Francisco - 01460288
 * Fábio Rodrigues  - 01464801
 * José Vanildo  - 01405929
