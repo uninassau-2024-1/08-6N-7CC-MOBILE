@@ -1,3 +1,4 @@
-# Alunos
+# PokemonApp-devMobile
 
-* Nome - Matrícula
+Grupo:
+* Leonardo Emanuel Souza dos Santos - 01418337

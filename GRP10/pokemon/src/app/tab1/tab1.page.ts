@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { PokeAPIService } from '../services/poke-api.service';
 import { ViaCEPService } from '../services/via-cep.service';
-import { HttpClient } from '@angular/common/http';
+import { SharedDataService } from '../services/shared-data.service';
 
 @Component({
   selector: 'app-tab1',
@@ -9,38 +9,60 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+
   areaBuscarPokemon: string = '';
   areaBusca: any = {
     bairro: '',
-    lacolidade: '',
+    localidade: '',
     logradouro: '',
     uf: ''
-  };
+  }
+
+  pokemon: any = {
+    name: '',
+    front_default: '',
+    abilities: '',
+    height: '',
+    weight: '',
+    wins: 0,
+    losses: 0,
+    draws: 0
+  }
 
   constructor(
-    public pokeAPIService: PokeAPIService,
-    public viaCEPService: ViaCEPService,
-    private http: HttpClient
+    private pokeAPIService: PokeAPIService,
+    private viaCEPService: ViaCEPService,
+    private sharedDataService: SharedDataService
   ) { }
 
   buscarPokemon() {
     this.viaCEPService.getViaCEPService(this.areaBuscarPokemon)
-      .subscribe((value) => {
-        this.areaBusca.logradouro = JSON.parse(JSON.stringify(value))['logradouro'];
-        this.areaBusca.bairro = ', ' + JSON.parse(JSON.stringify(value))['bairro'];
-        this.areaBusca.lacolidade = ' - ' + JSON.parse(JSON.stringify(value))['localidade'];
-        this.areaBusca.uf = '-' + JSON.parse(JSON.stringify(value))['uf'];
+      .subscribe((value: any) => {
+        this.areaBusca.logradouro = value.logradouro;
+        this.areaBusca.bairro     = ', ' + value.bairro;
+        this.areaBusca.localidade = ' - ' + value.localidade;
+        this.areaBusca.uf         = '-' + value.uf;
+      });
 
-      });
     this.pokeAPIService.getPokeAPIService()
-      .subscribe((value) => {
-        this.pokeAPIService.pokemonMeu.abilities = JSON.parse(JSON.stringify(value))['abilities'].length;
-        this.pokeAPIService.pokemonMeu.front_default = JSON.parse(JSON.stringify(value))['sprites']['other']['dream_world']['front_default'];
-        this.pokeAPIService.pokemonMeu.height = JSON.parse(JSON.stringify(value))['height'];
-        this.pokeAPIService.pokemonMeu.name = JSON.parse(JSON.stringify(value))['name'];
-        this.pokeAPIService.pokemonMeu.weight = JSON.parse(JSON.stringify(value))['weight'];
+      .subscribe((value: any) => {
+        const newPokemon = {
+          name:          value.name,
+          front_default: value.sprites.other.dream_world.front_default,
+          abilities:     value.abilities.length,
+          height:        value.height,
+          weight:        value.weight,
+          wins: 0,
+          losses: 0,
+          draws: 0
+        };
+
+        this.sharedDataService.addPokemon(newPokemon);
+        this.pokemon = newPokemon;
       });
-    this.pokeAPIService.pokemonPokedex.push(this.pokeAPIService.pokemonMeu);
-    console.log(this.pokeAPIService.pokemonPokedex)
+  }
+
+  getLastPokemon() {
+    return this.sharedDataService.getLastPokemon();
   }
 }

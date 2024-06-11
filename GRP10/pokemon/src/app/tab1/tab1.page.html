@@ -15,37 +15,53 @@
 
   <ion-card>
     <ion-card-header>
-      <ion-input [(ngModel)]="areaBuscarPokemon" [counter]="true" fill="solid" helperText="Área para buscar por Pokémon"
-        label-placement="floating" label="CEP" maxlength="8" placeholder="22555888" type="text"></ion-input>
-      <ion-button expand="block" fill="solid" (click)="buscarPokemon()">
-        Buscar por Pokemon
+      <ion-input
+        [(ngModel)]="areaBuscarPokemon"
+        [counter]="true"
+        fill="solid"
+        helperText="Área para buscar por Pokémon"
+        label-placement="floating"
+        label="CEP"
+        maxlength="8"
+        placeholder="22555888"
+        type="text"
+      ></ion-input>
+      <ion-button
+        expand="block"
+        fill="solid"
+        (click)="buscarPokemon()"
+      >
+        Buscar por Pokémon
         <ion-icon name="search" slot="end"></ion-icon>
       </ion-button>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
-        <ion-item>{{ areaBusca.logradouro }} {{ areaBusca.bairro }} {{ areaBusca.localidade }} {{ areaBusca.uf
-          }}</ion-item>
+        <ion-item>{{
+          areaBusca.logradouro +
+          areaBusca.bairro +
+          areaBusca.localidade +
+          areaBusca.uf
+        }}</ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
+  <ion-card *ngIf="pokemon.name">
     <ion-card-header>
-      <ion-card-title>{{ this.pokeAPIService.pokemonMeu.name| uppercase }}</ion-card-title>
-      <ion-img src="{{this.pokeAPIService.pokemonMeu.front_default}}"
-        alt="Bulbasaur"></ion-img>
+      <ion-card-title>{{ pokemon.name | uppercase }}</ion-card-title>
+      <ion-img alt="" [src]="pokemon.front_default"></ion-img>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
         <ion-item>
-          <ion-label>Abilities: {{ this.pokeAPIService.pokemonMeu.abilities}}</ion-label>
+          <ion-label>Abilities: {{ pokemon.abilities }}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Height: {{ this.pokeAPIService.pokemonMeu.height}}</ion-label>
+          <ion-label>Height: {{ pokemon.height }}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Weight: {{ this.pokeAPIService.pokemonMeu.weight}}</ion-label>
+          <ion-label>Weight: {{ pokemon.weight }}</ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>

@@ -1,60 +1,74 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { SharedDataService } from '../services/shared-data.service';
+import { PokeAPIService } from '../services/poke-api.service';
+import { PhotoService } from '../services/photo.service';
 
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page implements OnInit {
-  pokemon: any;
-  pokemonName: string;
-  pokemonColor: string;
-  pokemonAbilitiesTab1: number;
+export class Tab2Page {
+  pokemon: any = {
+    name: '',
+    front_default: '',
+    abilities: 0,
+    height: '',
+    weight: ''
+  };
+  pokemon2: any = {
+    name: '',
+    front_default: '',
+    abilities: 0,
+    height: '',
+    weight: ''
+  };
+  comparisonResult: { color: string, text: string } = { color: '', text: '' };
 
-  constructor(private http: HttpClient) {
-    this.pokemon = null;
-    this.pokemonName = '';
-    this.pokemonColor = '';
-    this.pokemonAbilitiesTab1 = 0;
+  constructor(
+    private sharedDataService: SharedDataService,
+    private pokeAPIService: PokeAPIService,
+    private photoService: PhotoService
+  ) { }
+
+  ionViewWillEnter() {
+    this.pokemon = this.sharedDataService.getPokemon();
+    this.buscarPokemon2();
   }
 
-  ngOnInit() {
-    this.pokemonAbilitiesTab1 = this.getPokemonAbilitiesFromTab1();
-    this.getRandomPokemon();
+  buscarPokemon2() {
+    this.pokeAPIService.getPokeAPIService()
+      .subscribe((value: any) => {
+        this.pokemon2.name          = value.name;
+        this.pokemon2.front_default = value.sprites.other.dream_world.front_default;
+        this.pokemon2.abilities     = value.abilities.length;
+        this.pokemon2.height        = value.height;
+        this.pokemon2.weight        = value.weight;
+        this.compareAbilities();
+      });
   }
 
-  activateCamera() {
-    // Lógica para ativar a câmera
-  }
-
-  async getRandomPokemon() {
-    const pokemonId = Math.floor(Math.random() * 100) + 1;
-    this.http.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`).subscribe((data: any) => {
-      this.pokemon = data;
-      this.pokemonName = this.pokemon.name.toUpperCase();
-      this.evaluatePokemonAbilities();
-    });
-  }
-
-  getPokemonAbilitiesFromTab1(): number {
-    // Aqui você deve implementar a lógica para obter o número de habilidades do Pokémon da tab1.
-    // Este é um exemplo estático. Você deve ajustar isso conforme necessário.
-    return 2; // Exemplo estático, substitua isso pela lógica real
-  }
-
-  evaluatePokemonAbilities() {
-    const abilitiesTab2 = this.pokemon.abilities.length;
-
-    if (abilitiesTab2 === this.pokemonAbilitiesTab1) {
-      this.pokemonColor = 'yellow';
-      this.pokemonName += ' Empate';
-    } else if (abilitiesTab2 > this.pokemonAbilitiesTab1) {
-      this.pokemonColor = 'red';
-      this.pokemonName += ' Ganhou';
+  compareAbilities() {
+    if (this.pokemon2.abilities === this.pokemon.abilities) {
+      this.comparisonResult = { color: 'yellow', text: 'Empatou' };
+      this.pokemon.draws++;
+      this.pokemon2.draws++;
+    } else if (this.pokemon2.abilities > this.pokemon.abilities) {
+      this.comparisonResult = { color: 'green', text: 'Venceu' };
+      this.pokemon.losses++;
+      this.pokemon2.wins++;
     } else {
-      this.pokemonColor = 'green';
-      this.pokemonName += ' Perdeu';
+      this.comparisonResult = { color: 'red', text: 'Perdeu' };
+      this.pokemon.wins++;
+      this.pokemon2.losses++;
     }
+
+    this.sharedDataService.updatePokemon(this.pokemon);
+    this.sharedDataService.updatePokemon(this.pokemon2);
+  }
+
+  addPhotoToGallery() {
+    this.photoService.addNewToGallery();
   }
 }
+

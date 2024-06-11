@@ -1,33 +1,14 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class PokeAPIService {
-  public pokemonMeu: any = {
-    abilities: '',
-    front_default: '',
-    heigth: '',
-    name: '',
-    weigth: '',
-  };
-  public pokemonPokedex: any = [];
-  // private apiUrl = 'https://pokeapi.co/api/v2/pokemon?limit=100';
-  // private apiUrl = `https://pokeapi.co/api/v2/pokemon/${Math.floor(Math.random() * 100 )}`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
-  getPokeAPIService(
-    apiUrl = `https://pokeapi.co/api/v2/pokemon/${Math.floor(
-      Math.random() * 100
-    )}`
-  ): Observable<any> {
-    return this.http.get<any>(apiUrl);
-  }
-
-  getPokemonDetails(url: string): Observable<any> {
-    return this.http.get<any>(url);
+  getPokeAPIService(id: number = Math.floor(Math.random() * 100)) {
+    return this.httpClient.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
   }
 }

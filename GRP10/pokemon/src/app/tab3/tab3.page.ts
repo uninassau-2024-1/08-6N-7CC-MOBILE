@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PokeAPIService } from '../services/poke-api.service';
+import { SharedDataService } from '../services/shared-data.service';
 
 @Component({
   selector: 'app-tab3',
@@ -9,31 +9,13 @@ import { PokeAPIService } from '../services/poke-api.service';
 export class Tab3Page implements OnInit {
   pokemons: any[] = [];
 
-  constructor(public pokeApiService: PokeAPIService) { }
+  constructor(private sharedDataService: SharedDataService) { }
 
   ngOnInit() {
-    this.loadPokemonData();
+    this.pokemons = this.sharedDataService.getPokemons();
   }
 
-  loadPokemonData() {
-    this.pokeApiService
-      .getPokeAPIService('https://pokeapi.co/api/v2/pokemon?limit=100')
-      .subscribe((data: any) => {
-        const results = data.results;
-
-        results.forEach((pokemon: any) => {
-          this.pokeApiService
-            .getPokemonDetails(pokemon.url)
-            .subscribe((details: any) => {
-              this.pokemons.push({
-                name: details.name,
-                front_default: details.sprites.front_default,
-                wins: 0, // Valores iniciais
-                losses: 0,
-                draws: 0,
-              });
-            });
-        });
-      });
+  ionViewWillEnter() {
+    this.pokemons = this.sharedDataService.getPokemons();
   }
 }
