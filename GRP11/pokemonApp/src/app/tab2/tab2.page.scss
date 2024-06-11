@@ -1,0 +1,48 @@
+/* Estilos padrão para telas grandes (desktops) */
+ion-card-title {
+    font-size: 24px;
+  }
+  
+  /* Estilos para tablets (largura máxima de 768px) */
+  @media (max-width: 768px) {
+    ion-card-title {
+      font-size: 20px;
+    }
+  
+  }
+  
+  /* Estilos para smartphones (largura máxima de 480px) */
+  @media (max-width: 480px) {
+    ion-card-title {
+      font-size: 16px;
+    }
+  }
+  
+  ion-card{
+    display: flex;
+    margin-bottom: 100px;
+    flex-direction: column;
+    justify-content: center; /* Distribua o espaço verticalmente */
+
+  }
+  
+  /* Estilos para o contêiner principal (ion-card) */
+ion-card-header {
+    display: block;
+    align-items: center; /* Centralize os elementos horizontalmente */
+    justify-content: center; /* Distribua o espaço verticalmente */
+    margin-bottom: 100px;
+
+  }
+
+  
+  /* Estilos para o título do Pokémon */
+  ion-card-title {
+    font-size: 24px;
+    margin-bottom: 10px; /* Adicione um espaço abaixo do título */
+  }
+  
+
+
+
+  
